@@ -2,18 +2,27 @@ const express = require('express');
 const app = express()
 const port = 3000
 
+
+
+
+
+// app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
-  res.sendFile( __dirname + "/Views/index.html")
+  // res.sendFile( __dirname + "/Views/index.html")
   // res.sendFile( "/Views/index.html" , {root : __dirname} )
+
+  Article.find().then((data) => {
+    res.render("home.ejs" , { Hi : "Home padg" ,  arr : data })
+  }).catch( (err) => {
+    console.log(err)
+  })
+
 
 })
 
-
-
-
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb+srv://Nemo1:1QAZ@cluster0.qg5noil.mongodb.net/?appName=Cluster0")
+mongoose.connect("mongodb+srv://Nemo1:1QAZ@cluster0.qg5noil.mongodb.net/AllData?appName=Cluster0")
 .then(() => {
   app.listen(port, () => {
     console.log(`http://localhost:${port}`);
@@ -67,4 +76,21 @@ app.get('/hi', (req, res) => {
 
 
 
+app.use(express.static('public'))
 
+//auto Style
+ 
+const path = require("path");
+const livereload = require("livereload");
+const liveReloadServer = livereload.createServer();
+liveReloadServer.watch(path.join(__dirname, 'public'));
+ 
+ 
+const connectLivereload = require("connect-livereload");
+app.use(connectLivereload());
+ 
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
+});
