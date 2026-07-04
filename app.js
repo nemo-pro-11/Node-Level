@@ -36,7 +36,7 @@ const Article = require("./models/mySchema");
 mongoose
   .connect(
     "mongodb+srv://Nemo1:1QAZ@cluster0.qg5noil.mongodb.net/AllData?appName=Cluster0",
-  // mongoose.connect("mongodb://localhost:27017")
+  // "mongodb://localhost:27017"
   )
   .then(() => {
     app.listen(port, () => {
