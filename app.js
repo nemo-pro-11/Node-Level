@@ -6,8 +6,16 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 app.get("/", (req, res) => {
-  res.render("index.ejs", {});
-});
+  Article.find().then((Data) => {
+    res.render("index.ejs", {arr : Data })
+
+
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+
 
 app.get("/user/add.html", (req, res) => {
   res.render("user/add.ejs", {});
@@ -30,6 +38,10 @@ const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 const Article = require("./models/mySchema");
 
+
+
+
+
 mongoose
   .connect(
     "mongodb+srv://Nemo1:1QAZ@cluster0.qg5noil.mongodb.net/AllData?appName=Cluster0",
@@ -44,10 +56,10 @@ mongoose
     console.log(err);
   });
 
-app.post("/", (req, res) => {
+app.post("/post", (req, res) => {
   Article.create(req.body)
     .then((data) => {
-      res.redirect("/user/add.html");
+      res.redirect("/");
       console.log(data);
     })
     .catch((err) => {
