@@ -2,9 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
-  UserNemo: String,
-  Age : Number
+  UserName: String,
+  LastName: String,
+  Telephone: String,
+  Email: String,
+  Age: Number,
+  Country : String,
+  Gender : String,
+
 });
 
-const Article = mongoose.model("Article", articleSchema);
+const Article = mongoose.model("User", articleSchema);
 module.exports = Article;
