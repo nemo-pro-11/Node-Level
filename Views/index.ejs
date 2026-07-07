@@ -33,10 +33,21 @@
         
         <%- include('./components/navPar.ejs') %>
 
+
+
+          
+            <% if (arr.length === 0 ) { %>
+
+             <h1 style="text-align: center; margin-top: 100px; font-size: 55px;">لا يوجد معلومات تعاله بكره</h1>
+
+
+            <% } else { %>
+
         <table
           style="width: 99%"
           class="text-center mx-auto table mt-5 table-striped table-bordered"
         >
+
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -48,54 +59,60 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
+
           <tbody>
+
             <% arr.forEach((itim , i) => { %>
             <tr>
               <th scope="row"><%= i = i + 1 %></th>
-              <td> <%= itim.UserName %>  <%= itim.LastName %>	</td>
-              <td><%= itim.Gender %>	</td>
-              <td><%= itim.Country %> </td>
-              <td> <%= itim.Age %>    </td>
-              <td>1 days ago            </td>
+              <td> <%= itim.UserName %> <%= itim.LastName %> </td>
+              <td> <%= itim.Gender %>	                       </td>
+              <td> <%= itim.Country %>                       </td>
+              <td> <%= itim.Age %>                           </td>
+              <td> <%=moment(itim.updatedAt).fromNow()%>     </td>
               <td>
+              
                 <a
                   data-bs-toggle="tooltip"
                   data-bs-title="View details"
                   data-bs-placement="top"
                   class="btn btn-primary btn-sm"
-                  href="./user/view.html"
+                  href="./view/<%= itim._id  %>"
                   ><i class="bi bi-eye"></i
                 ></a>
-
+             
                 <a
                   data-bs-toggle="tooltip"
                   data-bs-title="Edit user"
                   data-bs-placement="top"
                   class="btn btn-primary btn-sm"
-                  href="./user/edit.html"
+                  href="./edit/<%= itim._id  %>"
                 >
                   <i class="bi bi-pencil"></i>
-                </a>
+              </a>
+
+              <form style="display: inline; padding: 0px 5px ;" action="/delete/<%= itim._id %>?_method=delete"  method="post" >  
                 <button
                   data-bs-toggle="tooltip"
                   data-bs-title="Delete user"
                   data-bs-placement="top"
                   class="btn btn-danger btn-sm"
+               
                 >
                   <i class="bi bi-trash"></i>
                 </button>
+               </form> 
+
               </td>
             </tr>
 
             <% }) %>
+            <% } %>
 
-
-
-         
-      
-      
           </tbody>
+
         </table>
+  
       </section>
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>

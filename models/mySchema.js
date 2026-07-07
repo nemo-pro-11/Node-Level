@@ -10,7 +10,7 @@ const articleSchema = new Schema({
   Country : String,
   Gender : String,
 
-});
+} , {timestamps : true} );
 
 const Article = mongoose.model("User", articleSchema);
 module.exports = Article;

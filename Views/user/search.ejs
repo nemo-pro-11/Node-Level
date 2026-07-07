@@ -52,12 +52,18 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
+
           <tbody>
+
+<% data.forEach((itim , i) => { %>
             <tr>
-              <th scope="row">1</th>
-              <td>test1</td>
-              <td>test2</td>
-              <td>@test3</td>
+              
+
+              <th scope="row"> <%= i + 1 %></th>ejs
+                           
+              <td>  <%= itim.UserName %> <%= itim.LastName %> </td>
+              <td>  <%= itim.Gender %>                        </td>
+              <td>  <%= itim.Country %>                       </td>
 
               <td>
                 <a
@@ -65,7 +71,7 @@
                   data-bs-title="View details"
                   data-bs-placement="top"
                   class="btn btn-primary btn-sm"
-                  href="./user/view.html"
+                  href="/view/<%= itim._id  %>"
                   ><i class="bi bi-eye"></i
                 ></a>
 
@@ -74,21 +80,34 @@
                   data-bs-title="Edit user"
                   data-bs-placement="top"
                   class="btn btn-primary btn-sm"
-                  href="./user/edit.html"
+                  href="./edit/<%= itim._id  %>"
+
                 >
                   <i class="bi bi-pencil"></i>
                 </a>
+
+
+              <form style="display: inline; padding: 0px 5px ;" action="/delete/<%= itim._id %>?_method=delete"  method="post" >  
                 <button
                   data-bs-toggle="tooltip"
                   data-bs-title="Delete user"
                   data-bs-placement="top"
                   class="btn btn-danger btn-sm"
+               
                 >
                   <i class="bi bi-trash"></i>
                 </button>
+               </form> 
+               
               </td>
             </tr>
-          </tbody>
+              <% }) %>
+
+          </tbody> 
+
+
+
+
         </table>
       </section>
     </main>

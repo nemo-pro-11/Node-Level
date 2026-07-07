@@ -46,21 +46,17 @@
           </ol>
 
 
-          <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span> 6487021520bcf1af6319484c</p>
+          <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span> <%= Id %></p>
         </nav>
 
 
 
-
-
-
-
-
-        <form class="mx-0 row gx-3 gy-4 mt-2">
+        <form action="/edit/<%= data._id %>?_method=PUT" method="post" class="mx-0 row gx-3 gy-4 mt-2">
           <div class="col-md-6">
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
-              placeholder="Ali..."
+              value="<%= data.UserName %>"
+              name="UserName"
               type="text"
               class="form-control"
               id="inputfirstName4"
@@ -69,8 +65,9 @@
           <div class="col-md-6">
             <label for="inputlastName4" class="form-label">Last Name:</label>
             <input
-              placeholder="Hassan..."
+              value="<%= data.LastName %>"
               type="text"
+              name="LastName"
               class="form-control"
               id="inputlastName4"
             />
@@ -79,8 +76,9 @@
           <div class="col-md-6">
             <label for="inputemail4" class="form-label">Email:</label>
             <input
-              placeholder="ali@gmail.com"
+              value="<%= data.Email%>	"
               type="email"
+              name="Email"
               class="form-control"
               id="inputemail4"
             />
@@ -88,8 +86,11 @@
           <div class="col-md-6">
             <label for="inputtele4" class="form-label">Telephone:</label>
             <input
-              placeholder="011987899"
+
+             value= <%= data.Telephone %>
+             ;
               type="number"
+              name="Telephone"
               class="form-control"
               id="inputtele4"
             />
@@ -99,8 +100,10 @@
             <div class="col-md-6">
               <label for="inputage4" class="form-label">Age:</label>
               <input
-                placeholder="Your Age: ..."
+                value=<%= data.Age %>
+                ;
                 type="number"
+                name="Age"
                 class="form-control"
                 id="inputage4"
               />
@@ -110,11 +113,17 @@
           <div>
             <div class="col-md-6">
               <label for="inputCountry" class="form-label">Country:</label>
-              <select id="inputCountry" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
+              <select id="inputCountry" name="Country" class="form-select">
 
-                <option>Morocco</option>
-                <option>Egypt</option>
+                <% const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"] %>
+                <% countries.forEach(item => { %>
+                  <option
+                    value="<%= item %>"
+                    <%= item === data.Country ? "selected" : "" %>>
+                    <%= item %>
+                  </option>
+                <% }) %>
+
               </select>
             </div>
           </div>
@@ -122,8 +131,8 @@
           <div>
             <div class="col-md-6">
               <label for="inputGender" class="form-label">Gender:</label>
-              <select id="inputGender" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
+              <select id="inputGender" name="Gender" class="form-select">
+                <option selected hidden disabled> <%= data.Gender %>... </option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
@@ -176,9 +185,17 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-danger">
+
+
+
+              <form action="/delete/<%= Id %>?_method=delete"  method="post" >  
+
+              <button type="submit" class="btn btn-danger">
                 Delete
               </button>
+
+               </form> 
+
             </div>
           </div>
         </div>
